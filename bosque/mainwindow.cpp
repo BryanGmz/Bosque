@@ -93,7 +93,6 @@ void MainWindow::on_btnIngresar_clicked() {
                 break;
             }
         }
-        cout << "Hola Mundo XD\n";
         if(!error) {
             cout<<param_3<<endl;
             cout<<param_4<<endl;
@@ -104,6 +103,7 @@ void MainWindow::on_btnIngresar_clicked() {
             ui->lblComando->setStyleSheet("QLabel { background-color : ; color : blue; }");
         }
     }
+    qApp->processEvents();
 }
 
 /*

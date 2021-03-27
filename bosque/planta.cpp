@@ -15,21 +15,21 @@ void Planta::producirRamas(int numeroRamas, int numeroHojas, Ui::MainWindow *mai
     this->pidPlanta = getpid();
     this->contadorRamas = numeroRamas;
     for (int i = 0; i < numeroRamas; i++) {
-        int pid_p = 0;
-        pid_p = fork();
-        if(pid_p == -1){
-            printf("Error al crear el proceso hijo\n");
-            break;
-        } else if (pid_p == 0) {
+        pid_t pid_p = fork();
+        if(pid_p > 0) {//Padre
+
+          } else if (pid_p == 0) {
             cout<<"Pid - Rama "<<getpid()<<endl;
             Rama rama = Rama();
             rama.setIdRama(i);
             rama.setIdPlanta(this->idPlanta);
-            cout<<"Rama: "<<rama.getIdRama()<<" Numero Hojas: "<<numeroRamas<<endl;
+            cout<<"Rama: "<<rama.getIdRama()<<" Numero Hojas: "<<numeroHojas<<endl;
             ramas.push_back(rama);
-            this->ramas[i].producirHojas(numeroHojas, rama.getIdRama(), main);
+            rama.producirHojas(numeroHojas, rama.getIdRama(), main);
             break;
-        }
+        } else {
+            //error
+          }
     }
 }
 

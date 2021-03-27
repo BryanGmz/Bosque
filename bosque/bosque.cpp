@@ -18,20 +18,19 @@ void Bosque::construir(Ui::MainWindow *main, char instruccion, int numeroPlanta,
         }
     }
   if(!bandera){
-      int pid_p = 0;
-      pid_p = fork();
-      if(pid_p == -1){
-          printf("Error al crear el proceso hijo\n");
-          exit(0);
-      } else if (pid_p == 0) {
-        cout<<"Pid - Planta "<<getpid()<<endl;
-        Planta rama = Planta();
-        rama.setIdPlanta(numeroPlanta);
-        rama.setPidPlanta(getpid());
-        cout<<"Planta: "<<rama.getIdPlanta()<<" Numero Ramas: "<<numeroRamas<<endl;
-        plantas.push_back(rama);
-        rama.producirRamas(numeroRamas, numeroHojas, main);
-        return;
+      pid_t pid_p = fork();
+      if(pid_p > 0){ //Padre
+        } else if (pid_p == 0) {
+          cout<<"Pid - Planta "<<getpid()<<endl;
+          Planta planta = Planta();
+          planta.setIdPlanta(numeroPlanta);
+          planta.setPidPlanta(getpid());
+          cout<<"Planta: "<<planta.getIdPlanta()<<" Numero Ramas: "<<numeroRamas<<endl;
+          plantas.push_back(planta);
+          planta.producirRamas(numeroRamas, numeroHojas, main);
+        //return;
+      } else {
+          //Error
       }
   }
 }

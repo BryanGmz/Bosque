@@ -1,13 +1,14 @@
 #include "hoja.h"
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
 #include <iostream>
 #include <stdio.h>
-#include <QWidget>
-#include <QLabel>
 #include <QApplication>
+#include <QLabel>
+
 
 using namespace std;
 
@@ -18,21 +19,25 @@ Hoja::Hoja(Ui::MainWindow * main){
 }
 
 void Hoja::pintar(QLabel *lblPintar, QString color){
+  sleep(3);
   cout<<"\nDesde pintar "<<this->idHoja<<" Rama "<<this->idRama<<endl<<endl;
-  sleep(1);
+  sleep(3);
   lblPintar->setStyleSheet(color);
+  sleep(3);
   qApp->processEvents();
 }
 
 void Hoja::producirHoja(){
   QString color = "QLabel { background-color : white; color : white; }";
-  cout<<"\nDesde hoja "<<this->idHoja<<" Rama "<<this->idRama<<endl<<endl;
-  if(idRama == 0){
-      cout<<"\nDesde case "<<this->idHoja<<" Rama "<<this->idRama<<endl<<endl;
-    }
+  cout<<"Desde hoja "<<this->idHoja<<" Rama "<<this->idRama<<endl<<endl;
   switch (this->idRama) {
-      cout<<"\nDesde case "<<this->idHoja<<" Rama "<<this->idRama<<endl<<endl;
-      /*  case 0:
+    default:
+      cout << "Id Rama" << this->idRama << " Id Hoja" << this->idHoja << endl;
+      break;
+    }
+
+  switch (this->idRama) {
+        case 0:
           switch (this->idHoja) {
             case 0:
               pintar(main->lblHoja1_1, color);
@@ -64,6 +69,9 @@ void Hoja::producirHoja(){
             case 9:
               pintar(main->lblHoja1_10, color);
             break;
+            default:
+              cout<< "Error en Hojas" <<endl;
+              break;
             }
         break;
         case 1:
@@ -97,6 +105,9 @@ void Hoja::producirHoja(){
                   break;
                   case 9:
                     pintar(main->lblHoja2_10, color);
+                  break;
+                  default:
+                    cout<< "Error en Hojas" <<endl;
                   break;
                   }
         break;
@@ -132,7 +143,11 @@ void Hoja::producirHoja(){
                   case 9:
                     pintar(main->lblHoja3_10, color);
                   break;
+                  default:
+                    cout<< "Error en Hojas" <<endl;
+                  break;
                   }
+      break;
         case 3:
               switch (this->idHoja) {
                   case 0:
@@ -165,6 +180,9 @@ void Hoja::producirHoja(){
                   case 9:
                     pintar(main->lblHoja4_10, color);
                   break;
+                default:
+                  cout<< "Error en Hojas" <<endl;
+                break;
                   }
         break;
         case 4:
@@ -200,7 +218,10 @@ void Hoja::producirHoja(){
                     pintar(main->lblHoja5_10, color);
                   break;
                   }
-        break;*/
+        break;
+        default:
+          cout << "Error" << endl;
+        break;
       }
 }
 

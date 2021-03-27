@@ -18,12 +18,9 @@ void Rama::producirHojas(int numeroHojas, int idRam, Ui::MainWindow *main){
     this->pidRama = getpid();
     this->contadorHojas = numeroHojas;
     for (int i = 0; i < numeroHojas; i++) {
-        int pid_p = 0;
-        pid_p = fork();
-        if(pid_p == -1){
-            printf("Error al crear el proceso hoja de rama");
-            break;
-        } else if(pid_p == 0) {
+        pid_t pid_p = fork();
+        if(pid_p > 0) {//padre
+          } else if(pid_p == 0) {
             cout<<"Pid - Hoja "<<getpid()<<endl;
             Hoja nuevaHoja = Hoja(main);
             nuevaHoja.setIdHoja(i);
@@ -32,7 +29,9 @@ void Rama::producirHojas(int numeroHojas, int idRam, Ui::MainWindow *main){
             hojas.push_back(nuevaHoja);
             nuevaHoja.producirHoja();
             break;
-        }
+        } else {
+            //error
+          }
     }
 }
 

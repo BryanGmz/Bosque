@@ -18,24 +18,23 @@ Hoja::Hoja(Ui::MainWindow * main){
   this->main = main;
 }
 
-void Hoja::pintar(QLabel *lblPintar, QString color){
-  sleep(3);
-  cout<<"\nDesde pintar "<<this->idHoja<<" Rama "<<this->idRama<<endl<<endl;
-  sleep(3);
-  lblPintar->setStyleSheet(color);
-  sleep(3);
-  qApp->processEvents();
+void Hoja::setMostrar(bool mostrar){
+  this->mostrar = mostrar;
 }
 
-void Hoja::producirHoja(){
-  QString color = "QLabel { background-color : white; color : white; }";
-  cout<<"Desde hoja "<<this->idHoja<<" Rama "<<this->idRama<<endl<<endl;
-  switch (this->idRama) {
-    default:
-      cout << "Id Rama" << this->idRama << " Id Hoja" << this->idHoja << endl;
-      break;
+void Hoja::pintar(QLabel *lblPintar, QString color){
+  if(mostrar == true){
+      sleep(2);
+      cout<<"\nDesde pintar "<<this->idHoja<<" Rama "<<this->idRama<<endl<<endl;
+      sleep(2);
+      lblPintar->setStyleSheet(color);
+      sleep(2);
+      lblPintar->update();
     }
+}
 
+
+void Hoja::labelPintar(QString color){
   switch (this->idRama) {
         case 0:
           switch (this->idHoja) {
@@ -225,6 +224,11 @@ void Hoja::producirHoja(){
       }
 }
 
+void Hoja::producirHoja(){
+  //QString color = "QLabel { background-color : white; color : white; }";
+  //cout<<"\nDesde hoja: "<<this->idHoja<<" Rama "<<this->idRama<<endl;
+}
+
 int Hoja::getIdHoja(){
     return this->idHoja;
 }
@@ -243,4 +247,8 @@ void Hoja::setIdHoja(int idHoja){
 
 void Hoja::setIdRama(int idRama){
   this->idRama = idRama;
+}
+
+void Hoja::setPidHoja(int pid){
+  this->pidHoja = pid;
 }

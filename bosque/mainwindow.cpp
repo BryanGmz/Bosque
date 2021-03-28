@@ -3,8 +3,9 @@
 #include "ui_mainwindow.h"
 #include "bosque.h"
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 #include <iostream>
 #include <cstdlib>
 #include <vector>
@@ -33,8 +34,82 @@ void MainWindow::mensaje(QString msg){
 }
 
 void MainWindow::agregarLbl(){
-     //labelRamas.append(ui->lblRama1);
+    ui->lblHoja1_1->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja1_2->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja1_3->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja1_4->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja1_5->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja1_6->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja1_7->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja1_8->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja1_9->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja1_10->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja2_1->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja2_2->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja2_3->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja2_4->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja2_5->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja2_6->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja2_7->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja2_8->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja2_9->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja2_10->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja3_1->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja3_2->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja3_3->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja3_4->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja3_5->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja3_6->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja3_7->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja3_8->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja3_9->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja3_10->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja4_1->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja4_2->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja4_3->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja4_4->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja4_5->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja4_6->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja4_7->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja4_8->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja4_9->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja4_10->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja5_1->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja5_2->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja5_3->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja5_4->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja5_5->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja5_6->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja5_7->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja5_8->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja5_9->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblHoja5_10->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblRama1->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblRama2->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblRama3->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblRama4->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblRama5->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblTalloPrincipal->setStyleSheet("QLabel { background-color : ;}");
+    qApp->processEvents();
 }
+
+/*
+char *MainWindow::leerSalidaComando(char comando[]){
+	char *texto = malloc(10000);
+	FILE *fp;
+	char path[1035];
+	fp = popen(comando, "r");
+	if (fp == NULL){
+		printf("Failed to run comand\n");
+		exit(1);
+	}
+	while (fgets(path, sizeof(path), fp) != NULL) {
+		strcat(texto, path);
+	}
+	pclose(fp);
+	return texto;
+}
+*/
 
 void MainWindow::on_btnIngresar_clicked() {
     //Variables de los parametros a utilizar
@@ -50,6 +125,7 @@ void MainWindow::on_btnIngresar_clicked() {
     //ui->lblComando->setStyleSheet("QLabel { background-color : " + QString::fromStdString(comado) + "; color : white; }");
     sleep(2);
     ui->lblComando->setStyleSheet("QLabel { background-color : red; color : blue; }");
+    //ui->lblComando->update();
     qApp->processEvents();
     // Realizando split
     vector<string> resultados = split(comando, ',');

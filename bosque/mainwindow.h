@@ -23,6 +23,7 @@ public:
     void agregarLbl();
     void mensaje(QString msg);
     void reemplazo(std::string &v, char c1, char c2);
+    char *leerSalidaComando(char comando[]);
     //bool contiene(std::vector<Planta> plantas, int comparacion);
     std::vector<std::string> split(std::string str, char pattern);
 

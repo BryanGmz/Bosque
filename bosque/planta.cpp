@@ -43,7 +43,7 @@ void Planta::producirRamas(int numeroRamas, int numeroHojas, Ui::MainWindow *mai
 }
 
 void Planta::pintar(QLabel *lblPintar, QString color){
-  cout << "Bandera Tallo "<< this->mostrar;
+  cout << "Bandera Tallo "<< this->mostrar << endl;
   if(mostrar == true){
       sleep(2);
       cout<<"\nDesde pintar Tallo "<<this->idPlanta<<" PID "<<this->pidPlanta<<endl<<endl;

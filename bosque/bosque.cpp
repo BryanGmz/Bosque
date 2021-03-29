@@ -50,8 +50,6 @@ void Bosque::construir(Ui::MainWindow *main, char instruccion, int numeroPlanta,
         } else if (pid_p == 0) {
           cout << "[Tallo] PID "<<getpid() <<" from [Programa] PID "<< getppid()<<endl;
           planta->producirRamas(numeroRamas, numeroHojas, main, planta);
-          //cout<<"Planta - 2: "<<planta.getIdPlanta()<<" Numero Ramas: "<< planta.getRamas().size() << " PID " << planta.getPidPlanta() << " SIZE " << this->plantas.size() <<endl;
-          //exit(0);
           return;
       } else { /* Error */ }
       //cout << "Tamanio Vector: fuera: " << planta.getRamas().size() << endl;

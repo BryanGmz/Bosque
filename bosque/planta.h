@@ -15,7 +15,7 @@ public:
     Planta(Ui::MainWindow *main);
     void setIdPlanta(int idPlanta);
     void setPidPlanta(int pidPlanta);
-    void producirRamas(int numeroRamas, int numeroHojas, Ui::MainWindow *main, Planta *planta);
+    void producirRamas(int numeroRamas, int numeroHojas, Ui::MainWindow *main, Planta *planta, bool mostrar);
     void setMostrar(bool mostrar);
     void pintar(QLabel *lblPintar, QString color);
     void labelPintar(QString color);
@@ -23,6 +23,7 @@ public:
     int getIdPlanta();
     int getPidPlanta();
     void mostrarPlanta();
+    bool getMostrar();
     vector<Rama> getRamas();
     int contadorRamas;
 

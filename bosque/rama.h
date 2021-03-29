@@ -12,7 +12,7 @@ class Rama
 public:
     Rama();
     Rama(Ui::MainWindow *main);
-    void producirHojas(int numeroHojas, int idRam, Ui::MainWindow *main, Rama *rama);
+    void producirHojas(int numeroHojas, int idRam, Ui::MainWindow *main, Rama *rama, bool mostrar);
     int getIdRama();
     int getIdPlanta();
     int getPidRama();

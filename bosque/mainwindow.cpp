@@ -89,27 +89,9 @@ void MainWindow::agregarLbl(){
     ui->lblRama3->setStyleSheet("QLabel { background-color : ;}");
     ui->lblRama4->setStyleSheet("QLabel { background-color : ;}");
     ui->lblRama5->setStyleSheet("QLabel { background-color : ;}");
-    ui->lblTalloPrincipal->setStyleSheet("QLabel { background-color : ;}");
+    ui->lblTalloPrincipal->setStyleSheet("QLabel { background-color : gray;}");
     qApp->processEvents();
 }
-
-/*
-char *MainWindow::leerSalidaComando(char comando[]){
-	char *texto = malloc(10000);
-	FILE *fp;
-	char path[1035];
-	fp = popen(comando, "r");
-	if (fp == NULL){
-		printf("Failed to run comand\n");
-		exit(1);
-	}
-	while (fgets(path, sizeof(path), fp) != NULL) {
-		strcat(texto, path);
-	}
-	pclose(fp);
-	return texto;
-}
-*/
 
 void MainWindow::on_btnIngresar_clicked() {
     //Variables de los parametros a utilizar
@@ -122,10 +104,8 @@ void MainWindow::on_btnIngresar_clicked() {
     reemplazo(comando, ')', ' ');
     comando.erase(remove(comando.begin(), comando.end(), ' '), comando.end());
     ui->lblComando->setText("Este es el comando: \n" + QString::fromStdString(comando));
-    //ui->lblComando->setStyleSheet("QLabel { background-color : " + QString::fromStdString(comado) + "; color : white; }");
     sleep(2);
     ui->lblComando->setStyleSheet("QLabel { background-color : red; color : blue; }");
-    //ui->lblComando->update();
     qApp->processEvents();
     // Realizando split
     vector<string> resultados = split(comando, ',');
@@ -145,6 +125,9 @@ void MainWindow::on_btnIngresar_clicked() {
                         mensaje("Error, los siento la instruccion no corresponde a ninguno de los registrados");
                         error = true;
                     }
+                    if(!(param_1 == 'i' || param_1 == 'I')){
+                        agregarLbl();
+                      }
                 break;
                 case 1:
                     param_2 = stoi(resultados[1]);
@@ -170,23 +153,26 @@ void MainWindow::on_btnIngresar_clicked() {
             }
         }
         if(!error) {
-            cout<<param_3<<endl;
-            cout<<param_4<<endl;
-            monatania.construir(ui, param_1, param_2, param_3, param_4);
-            ui->lblComando->setText(ui->lblComando->text() + "\n" + QString::fromStdString(resultados[0]) + QString::number(param_2 + param_3 + param_4));
-            qApp->processEvents();
-            sleep(2);
-            ui->lblComando->setStyleSheet("QLabel { background-color : ; color : blue; }");
+            if(param_1 == 'P' || param_1 == 'p'){
+                cout<<param_3<<endl;
+                cout<<param_4<<endl;
+                monatania.construir(ui, param_1, param_2, param_3, param_4);
+                ui->lblComando->setText(ui->lblComando->text() + "\n" + QString::fromStdString(resultados[0]) + QString::number(param_2 + param_3 + param_4));
+                qApp->processEvents();
+                sleep(2);
+                ui->lblComando->setStyleSheet("QLabel { background-color : ; color : blue; }");
+            } else if (param_1 == 'M' || param_1 == 'm'){
+
+            } else if (param_1 == 'I' || param_1 == 'i'){
+              monatania.greepPsTree(param_2);
+              cout<<"\n\n\nYa puedes ir al fichero de salida: <Salida.txt>\n\n\n" << endl;
+            } else {
+              cout << "ERROR Parametro: " << param_1 << " No reconocido" << endl;
+            }
         }
     }
-    qApp->processEvents();
+    //qApp->processEvents();
 }
-
-/*
-bool MainWindow::contiene(vector<Planta> plantas, int comparacion){
-    return true;
-}
-*/
 
 vector<string> MainWindow::split(string str, char pattern) {
     int posInit = 0;

@@ -17,29 +17,33 @@ Planta::Planta(Ui::MainWindow *main){
   this->main = main;
 }
 
-void Planta::producirRamas(int numeroRamas, int numeroHojas, Ui::MainWindow *main, Planta *planta){
-    for (int i = 0; i < numeroRamas; i++) {
-        Rama r = Rama(main);
-        Rama *rama = &r;
-        int pid_p = fork();
-        if(pid_p > 0) { /*Padre*/
-            rama->setIdRama(i);
-            rama->setIdPlanta(this->idPlanta);
-            rama->setPidRama(pid_p);
-            planta->getRamas().push_back(*rama);
-            rama->setMostrar(true);
-            rama->labelPintar("QLabel { background-color : rgb(143, 89, 2); color : blue; }");
-            sleep(1);
-            qApp->processEvents();
-            cout<<"Rama: "<<rama->getIdRama()<<" Numero Hojas: "<< rama->getHojas().size() << " PID " << rama->getPidRama() << " SIZE " << planta->getRamas().size() <<endl;
-          } else if (pid_p == 0) {
-            cout << "[Rama] PID "<<getpid() <<" from [Planta] PID "<< getppid()<< " ID - Rama " << i <<endl;
-            rama->producirHojas(numeroHojas, i, main, rama);
-            //cout<<"Rama Despues: "<<0<<" Numero Hojas: "<< rama.getHojas().size() << " PID " << 0 << " SIZE " << this->getRamas().size() <<endl;
-            //exit(0);
-            break;
-        } else { /* Error */ }
-    }
+bool Planta::getMostrar(){
+  return this->mostrar;
+}
+
+void Planta::producirRamas(int numeroRamas, int numeroHojas, Ui::MainWindow *main, Planta *planta, bool mostrar){
+  for (int i = 0; i < numeroRamas; i++) {
+      Rama r = Rama(main);
+      Rama *rama = &r;
+      int pid_p = fork();
+      if(pid_p > 0) { /*Padre*/
+          rama->setIdRama(i);
+          rama->setIdPlanta(this->idPlanta);
+          rama->setPidRama(pid_p);
+          planta->getRamas().push_back(*rama);
+          rama->setMostrar(mostrar);
+          rama->labelPintar("QLabel { background-color : rgb(143, 89, 2); color : blue; }");
+          sleep(1);
+          qApp->processEvents();
+          cout<<"Rama: "<<rama->getIdRama()<<" Numero Hojas: "<< rama->getHojas().size() << " PID " << rama->getPidRama() << " SIZE " << planta->getRamas().size() <<endl;
+        } else if (pid_p == 0) {
+          cout << "[Rama] PID "<<getpid() <<" from [Planta] PID "<< getppid()<< " ID - Rama " << i <<endl;
+          rama->producirHojas(numeroHojas, i, main, rama, mostrar);
+          //cout<<"Rama Despues: "<<0<<" Numero Hojas: "<< rama.getHojas().size() << " PID " << 0 << " SIZE " << this->getRamas().size() <<endl;
+          //exit(0);
+          break;
+      } else { /* Error */ }
+  }
 }
 
 void Planta::pintar(QLabel *lblPintar, QString color){

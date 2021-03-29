@@ -25,27 +25,27 @@ void Rama::setMostrar(bool mostrar){
   this->mostrar = mostrar;
 }
 
-void Rama::producirHojas(int numeroHojas, int idRam, Ui::MainWindow *main, Rama *rama){
-    for (int i = 0; i < numeroHojas; i++) {
-        Hoja nv = Hoja(main);
-        Hoja *nuevaHoja = &nv;
-        int pid_p = fork();
-        if(pid_p > 0) { /*padre*/
-            nuevaHoja->setIdHoja(i);
-            nuevaHoja->setIdRama(idRam);
-            nuevaHoja->setPidHoja(pid_p);
-            rama->getHojas().push_back(*nuevaHoja);
-            nuevaHoja->setMostrar(true);
-            nuevaHoja->labelPintar("QLabel { background-color : blue; color : blue; }");
-            sleep(1);
-            qApp->processEvents();
-            cout << "Hoja: "<<nuevaHoja->getIdHoja()<< " PID " << nuevaHoja->getPidHoja() << " SIZE " << rama->getHojas().size() <<endl;
-          } else if(pid_p == 0) {
-            cout << "[Hoja] PID "<<getpid() <<" from [Rama] PID "<< getppid()<< " ID - Hoja " << i <<endl;
-            nuevaHoja->producirHoja();
-            break;
-        } else { /* Error */ }
-    }
+void Rama::producirHojas(int numeroHojas, int idRam, Ui::MainWindow *main, Rama *rama, bool mostrar){
+  for (int i = 0; i < numeroHojas; i++) {
+      Hoja nv = Hoja(main);
+      Hoja *nuevaHoja = &nv;
+      int pid_p = fork();
+      if(pid_p > 0) { /*padre*/
+          nuevaHoja->setIdHoja(i);
+          nuevaHoja->setIdRama(idRam);
+          nuevaHoja->setPidHoja(pid_p);
+          rama->getHojas().push_back(*nuevaHoja);
+          nuevaHoja->setMostrar(mostrar);
+          nuevaHoja->labelPintar("QLabel { background-color : blue; color : blue; }");
+          sleep(1);
+          qApp->processEvents();
+          cout << "Hoja: "<<nuevaHoja->getIdHoja()<< " PID " << nuevaHoja->getPidHoja() << " SIZE " << rama->getHojas().size() <<endl;
+        } else if(pid_p == 0) {
+          cout << "[Hoja] PID "<<getpid() <<" from [Rama] PID "<< getppid()<< " ID - Hoja " << i <<endl;
+          nuevaHoja->producirHoja();
+          break;
+      } else { /* Error */ }
+  }
 }
 
 void Rama::pintar(QLabel *lblPintar, QString color){
@@ -61,7 +61,6 @@ void Rama::pintar(QLabel *lblPintar, QString color){
 }
 
 void Rama::labelPintar(QString color){
-  cout<<"Main pintar rama"<<main<<endl;
   switch (this->idRama) {
     case 0:
       pintar(main->lblRama1, color);
